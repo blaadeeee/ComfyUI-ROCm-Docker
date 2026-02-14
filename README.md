@@ -1,0 +1,2 @@
+# ComfyUI-ROCm-Docker
+A simple utility to manage running [ComfyUI](https://www.comfy.org/) on Linux under Docker, for [ROCm compatible graphics cards](https://rocm.docs.amd.com/projects/install-on-linux/en/latest/reference/system-requirements.html#supported-gpus).

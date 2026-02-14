@@ -1,0 +1,29 @@
+services:
+  pytorch:
+    build: .
+    hostname: pytorch
+    ipc: host
+    network_mode: host
+    working_dir: /app
+    cap_add:
+      - SYS_PTRACE
+    devices:
+      - /dev/dri
+      - /dev/kfd
+    environment:
+      - TORCH_ROCM_AOTRITON_ENABLE_EXPERIMENTAL=1
+    group_add:
+      - video
+    security_opt:
+      - seccomp=unconfined
+    volumes:
+      - venv:/opt/venv
+      - ./comfyui/custom_nodes:/app/custom_nodes
+      - ./comfyui/input:/app/input
+      - ./comfyui/models:/app/models
+      - ./comfyui/output:/app/output
+      - ./comfyui/user:/app/user
+
+volumes:
+  venv:
+    driver: local
