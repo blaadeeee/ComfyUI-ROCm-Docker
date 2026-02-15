@@ -17,13 +17,9 @@ services:
     security_opt:
       - seccomp=unconfined
     volumes:
-      - venv:/opt/venv
       - ./comfyui/custom_nodes:/app/custom_nodes
       - ./comfyui/input:/app/input
       - ./comfyui/models:/app/models
       - ./comfyui/output:/app/output
       - ./comfyui/user:/app/user
-
-volumes:
-  venv:
-    driver: local
+      - ./comfyui/venv:/app/venv
