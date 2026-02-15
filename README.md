@@ -4,3 +4,4 @@ A simple utility to manage running [ComfyUI](https://www.comfy.org/) on Linux un
 ## Usage
 - Run `make` to build and launch (and attach logger to) the container.
 - Run `make help` for other supported helper commands.
+- To reset the virtual environment and reinstall all dependencies, run `RESET_VENV=1 make`.

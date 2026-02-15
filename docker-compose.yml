@@ -12,6 +12,7 @@ services:
       - /dev/kfd
     environment:
       - TORCH_ROCM_AOTRITON_ENABLE_EXPERIMENTAL=1
+      - RESET_VENV=${RESET_VENV:-0}
     group_add:
       - video
     security_opt:

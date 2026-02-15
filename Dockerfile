@@ -2,7 +2,7 @@ FROM rocm/pytorch:latest
 WORKDIR /app
 
 # Clone ComfyUI repository
-RUN git clone https://github.com/Comfy-Org/ComfyUI .
+RUN git clone --depth 1 https://github.com/Comfy-Org/ComfyUI .
 
 # Define entrypoint script
 COPY entrypoint.sh /app/entrypoint.sh
