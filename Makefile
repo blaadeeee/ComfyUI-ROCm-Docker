@@ -11,21 +11,24 @@ help: ## Display this help message
 	@echo "Usage: make <target>"
 	@echo ""
 	@echo "Targets:"
-	@grep -E '(^[a-zA-Z_-]+:.*?## .*$$)|(^##)' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  %-15s %s\n", $$1, $$2}' | sed 's/^[ \t]*#//g'
+	@grep -E '(^[a-zA-Z_-]+:.*?## .*$$)|(^##)' $(MAKEFILE_LIST) \
+		| sed 's/^[ \t]*#//' \
+		| awk 'BEGIN {FS = ":.*?## "} {printf "  %-8s %s\n", $$1, $$2}' \
+		| sort
 
-start: build up logs ## Build, start the containers, and view logs [default target]
+start: build up logs ## Build and start ROCm/ComfyUI container and view logs [default target]
 
-build: ## Build the Docker images defined in the compose file
+build: ## Build ROCm/ComfyUI container
 	$(DOCKER_COMPOSE) -f $(COMPOSE_FILE) build --no-cache
 
-up: ## Start the containers in detached mode
+up: ## Start ROCm/ComfyUI container in detached mode
 	$(DOCKER_COMPOSE) -f $(COMPOSE_FILE) up -d
 
-down: ## Stop and remove containers, networks, and volumes
+down: ## Stop and remove ROCm/ComfyUI container
 	$(DOCKER_COMPOSE) -f $(COMPOSE_FILE) down --remove-orphans
 
-logs: ## View logs for all services
-	$(DOCKER_COMPOSE) -f $(COMPOSE_FILE) logs -f
+logs: ## Attach to ROCm/ComfyUI container logs (must be running)
+	$(DOCKER_COMPOSE) -f $(COMPOSE_FILE) logs -f rocm-comfyui
 
-sh: ## Open a shell in the within the specified service container
-	$(DOCKER_COMPOSE) -f $(COMPOSE_FILE) exec pytorch /bin/bash
+sh: ## Open a shell within ROCm/ComfyUI container (must be running)
+	$(DOCKER_COMPOSE) -f $(COMPOSE_FILE) exec rocm-comfyui /bin/bash

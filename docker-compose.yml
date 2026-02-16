@@ -1,7 +1,8 @@
 services:
-  pytorch:
+  rocm-comfyui:
     build: .
-    hostname: pytorch
+    container_name: rocm-comfyui
+    hostname: rocm-comfyui
     ipc: host
     network_mode: host
     working_dir: /app
