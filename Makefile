@@ -28,7 +28,7 @@ down: ## Stop and remove ROCm/ComfyUI container
 	$(DOCKER_COMPOSE) -f $(COMPOSE_FILE) down --remove-orphans
 
 logs: ## Attach to ROCm/ComfyUI container logs (must be running)
-	$(DOCKER_COMPOSE) -f $(COMPOSE_FILE) logs -f rocm-comfyui
+	$(DOCKER_COMPOSE) -f $(COMPOSE_FILE) logs -f --no-log-prefix rocm-comfyui
 
 sh: ## Open a shell within ROCm/ComfyUI container (must be running)
 	$(DOCKER_COMPOSE) -f $(COMPOSE_FILE) exec rocm-comfyui /bin/bash
